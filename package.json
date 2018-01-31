@@ -1,0 +1,11 @@
+{
+  "name": "Lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:thewillhuang/go-lambda-graphql.git",
+  "author": "William Huang <will.h86@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@playlyfe/gql": "^2.3.2"
+  }
+}

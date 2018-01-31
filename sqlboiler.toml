@@ -1,0 +1,8 @@
+blacklist=["schema_migrations"]
+[postgres]
+  dbname="lambda"
+  host="localhost"
+  port=5432
+  user="williamhuang"
+  pass=""
+  sslmode="disable"

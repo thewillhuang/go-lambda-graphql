@@ -1,0 +1,11 @@
+development:
+    dialect: postgres
+    datasource: dbname=lambda sslmode=disable
+    dir: migrations
+    table: migrations
+
+production:
+    dialect: postgres
+    datasource: dbname=lambda sslmode=disable
+    dir: migrations
+    table: migrations

@@ -1,0 +1,116 @@
+# Custom Time type
+scalar Time
+
+# represents a node in relay
+interface Node {
+  id: ID!
+}
+
+# The location input object when someone is searching through a location
+input LocationInput {
+	# name of the location
+	address: String!
+	# geohash of the location
+	geohash: String!
+}
+
+input PriceInput {
+	location: LocationInput!
+	price: Float!
+}
+
+# represents the user
+type User implements Node {
+	# The ID of the entity
+	id: ID!
+	# entity updated at
+	updated: Time!
+	# entity created at
+	created: Time!
+	# name of the user
+  name: String!
+	# email of the user
+  email: String!
+}
+
+# A crowdfunded campaign for a specific item
+type Campaign implements Node {
+	# The ID of the entity
+	id: ID!
+	# entity updated at
+	updated: Time!
+	# entity created at
+	created: Time!
+	# The amount funded
+	funded: Float!
+	# The amount needed
+	needed: Float!
+	# The test result of the campaign
+	result: String!
+	# The shipping status of the item
+	status: Float!
+}
+
+# An item on the platform
+type Item implements Node {
+	# The ID of the entity
+	id: ID!
+	# entity updated at
+	updated: Time!
+	# entity created at
+	created: Time!
+	# name of this item
+	nameConnection(first: Int, after: ID, before: ID, last: Int): NameConnection!
+}
+
+
+
+# Information for paginating this connection
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+
+type Name {
+	name: String!
+}
+
+# A connection object for a Name
+type NameConnection {
+	# The edges for each of the item's Name.
+	edges: [NameEdge]
+	# Information for paginating this connection
+	pageInfo: PageInfo!
+}
+
+	# An edge object for a Name
+type NameEdge {
+	# A cursor used for pagination
+	cursor: ID!
+	# The character represented by this Name edge
+	node: Name
+}
+
+# The mutation type, represents all updates we can make to our data
+type Mutation {
+
+	signup(name: String!, email: String!, password: String!): User
+	updateUser(jwt: String!, email: String, password: String, name: String): User
+}
+
+# The query type, represents the entry points into our object graph
+type Query {
+	# hello: String!
+	jwt(email: String!, password: String!): String
+	# the root field
+	viewer(jwt: String!): User
+
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}
